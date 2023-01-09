@@ -3,16 +3,25 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 
-<h3 class="card-title">Car Customers</h3>
+<h3 class="card-title"> Car Customers</h3>
+<a href="/customers/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Customer
+</a>
+<br />
+<br />
 
 @if (Customers == null)
 {
-    <div class="alert alert-info">Loading Customers...</div>}
+    <div class="alert alert-info">Loading Customers...</div>
+}
 else
-    {
+{
     <table class="table table-responsive">
         <thead>
             <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Driving License</th>
                 <th>Contact Number</th>
                 <th>Email Address</th>
@@ -23,6 +32,8 @@ else
             @foreach (var customer in Customers)
             {
                 <tr>
+                    <td>@customer.FirstName</td>
+                    <td>@customer.LastName</td>
                     <td>@customer.DrivingLicense</td>
                     <td>@customer.ContactNumber</td>
                     <td>@customer.EmailAddress</td>
@@ -54,12 +65,12 @@ else
     async Task Delete(int customerId)
     {
         var customer = Customers.First(q => q.Id == customerId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {customer.Id}?");
-       
+        var confirm = await js.InvokeAsync<bool>("Confirm", $"Do you want to delete {customer.DrivingLicense}?");
         if (confirm)
         {
             await _client.DeleteAsync($"{Endpoints.CustomersEndpoint}/{customerId}");
             await OnInitializedAsync();
         }
     }
+
 }

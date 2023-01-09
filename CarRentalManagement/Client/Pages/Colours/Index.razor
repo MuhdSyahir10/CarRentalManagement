@@ -4,12 +4,18 @@
 @attribute [Authorize]
 
 <h3 class="card-title">Car Colours</h3>
+<a href="/colours/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Colour
+</a>
+<br />
+<br />
 
 @if (Colours == null)
 {
     <div class="alert alert-info">Loading Colours...</div>}
 else
-    {
+{
     <table class="table table-responsive">
         <thead>
             <tr>
