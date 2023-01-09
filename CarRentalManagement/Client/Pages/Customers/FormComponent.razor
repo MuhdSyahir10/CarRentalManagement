@@ -1,0 +1,38 @@
+﻿<EditForm Model="@customer" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@customer.FirstName" class="form-control" />
+            <ValidationMessage For="@(() => customer.FirstName)" />
+            <br />
+            <InputText @bind-Value="@customer.LastName" class="form-control" />
+            <ValidationMessage For="@(() => customer.LastName)" />
+            <br />
+            <InputText @bind-Value="@customer.DrivingLicense" class="form-control" />
+            <ValidationMessage For="@(() => customer.DrivingLicense)" />
+            <br />
+            <InputText @bind-Value="@customer.Address" class="form-control" />
+            <ValidationMessage For="@(() => customer.Address)" />
+            <br />
+            <InputText @bind-Value="@customer.ContactNumber" class="form-control" />
+            <ValidationMessage For="@(() => customer.ContactNumber)" />
+            <br />
+            <InputText @bind-Value="@customer.EmailAddress" class="form-control" />
+            <ValidationMessage For="@(() => customer.EmailAddress)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        @ButtonText
+    </button>
+    <BackToList Target="customers" />
+</EditForm>
+
+@code { 
+    [Parameter] public Customer customer { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}
